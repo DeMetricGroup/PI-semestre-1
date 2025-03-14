@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: lightgray;">
+    <center>
+    <h1 style="color:darkred;">Simulador Financeiro</h1>
+
+    <br><h4>Do total produzido, quantas sacas de soja são perdidas por mês? <br>(1 saca = 60kg)</h4><input type="text" id="input_saca" placeholder="Quantidade">  <br><br>
+    <h4>Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?</h4><input type="text" id="input_saca2" placeholder="Quantidade">  <br><br><br>
+
+    <br><button onclick="simular()">Simular</button></center>
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+
+<script>
+
+        var sacaValor = Number(115);
+    
+    function simular() {
+        var qtdeSaca = Number(input_saca.value);
+        var qtdeSacaPerda = Number(input_saca2.value);
+        var prejuizoTotal = qtdeSaca * sacaValor
+        var prejuizo20porc = qtdeSacaPerda * sacaValor
+
+        div_mensagem.innerHTML = `<br><br><br><center> De acordo com suas informações, atualmente a perda em reais da quantidade total de sacas perdidas é de <b>R$ ${prejuizoTotal},00</b>. <br>
+        <br> Se considerar somente as sacas perdidas por falhas no armazenamento, o valor apurado é de <b>R$ ${prejuizo20porc},00</b>. 
+        <br><br><br>        
+        <h5>*Valor médio da saca: R$ 115,00.</h5></center>`
+    }
+
+
+</script>
