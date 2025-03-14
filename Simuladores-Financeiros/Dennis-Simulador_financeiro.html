@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Calculadora Financeira</h1>
+        Informe o valor produzido em toneladas:
+        <input type="number" id="id_peso">
+        <br>Informe o valor perdido em kg no armazenamento por conta da umidade/pragas:
+        <input type="number" id="id_perda">
+        <br>Qual a moeda em que o produto é negociado?
+        <input type="text" id="id_moeda">
+        <br><button onclick="calcular()">Calcular</button>
+            <button onclick="paises()">Ver lista de paises/moedas</button>
+
+
+
+
+        <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+    function calcular(){
+        // Definir variaveis para calculo
+        var total = (Number(id_peso.value))*1000;
+        var perda = Number(id_perda.value);
+        var perdaMoeda = 0;
+        var saca = total/60;
+        var bushel = total/27.2;
+        var sacaPerd = perda/60;
+        var bushelPerd = perda/27.2;
+        
+        var precoTon = 1784.67;
+        var precoBushel = 48.57;
+
+
+        // Calculando a porcentagem da perda da Safra
+        var porcPerda = (perda/total)*100;
+
+        // Variaveis para exportação
+        var moeda = id_moeda.value;
+
+        // Zerando a div
+        div_mensagem.innerHTML = " ";
+        
+
+        div_mensagem.innerHTML += `<br>
+        Você tem uma perda de ${porcPerda}% da sua safra total <br>`;
+
+        if (moeda == "Real") {
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em real perdido é de ${perdaMoeda}`;
+        } else if (moeda == "Yuan"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Yuan perdido é de ${perdaMoeda*0.70}`;
+        } else if (moeda == "Euro"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Euro perdido é de ${perdaMoeda*5.30}`;
+        } else if (moeda == "Baht"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Baht perdido é de ${perdaMoeda*0.14}`;
+        } else if (moeda == "Peso Mexicano"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Peso Mexicano perdido é de ${perdaMoeda*0.28}`;
+        }  else if (moeda == "Dong"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Dong perdido é de ${perdaMoeda*0.00021}`;
+        } else if (moeda == "Won"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Won perdido é de ${perdaMoeda*0.0038}`;
+        } else if (moeda == "Iene"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Iene perdido é de ${perdaMoeda*0.034}`;
+        } else if (moeda == "Rial"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Rial perdido é de ${perdaMoeda*0.000012}`;
+        } else if (moeda == "Dólar Taiwanês"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Dólar Taiwanês perdido é de ${perdaMoeda*0.16}`;
+        } else if (moeda == "Rupia"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Rupia perdido é de ${perdaMoeda*0.00032}`;
+        } else if (moeda == "Lira Turca"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Lira Turca perdido é de ${perdaMoeda*0.18}`;
+        } else if (moeda == "Peso Argentino"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Peso Argentino perdido é de ${perdaMoeda*0.014}`;
+        } else if (moeda == "Dólar"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Dólar perdido é de ${perdaMoeda*5.0}`;
+        } else if (moeda == "Dólar Canadense"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Dólar Canadense perdido é de ${perdaMoeda*3.70}`;
+        } else if (moeda == "Rublo"){
+            perdaMoeda = (perda/1000)*precoTon;
+            div_mensagem.innerHTML += `O valor em Rublo perdido é de ${perdaMoeda*0.055}`;
+        } 
+
+        div_mensagem.innerHTML += `<br><br>
+        Toneladas perdidas: ${perda/1000} <br>
+        Sacas perdidas: ${sacaPerd} <br>
+        Bushel Perdidas: ${bushelPerd} <br>
+        <br><br>
+        Informação de valor: <br>
+        1 tonelada = 1.000 kg<br>
+        1 Saca= 60 kg<br>
+        1 Bushel = 27,2155 kg
+        
+        `;
+    }
+    function paises(){
+        alert(`
+                China (Yuan ≈ 0,70 BRL)
+                União Europeia (Euro ≈ 5,30 BRL)
+                Tailândia (Baht ≈ 0,14 BRL)
+                México (Peso Mexicano ≈ 0,28 BRL)
+                Vietnã (Dong ≈ 0,00021 BRL)
+                Coreia do Sul (Won ≈ 0,0038 BRL)
+                Japão (Iene ≈ 0,034 BRL)
+                Irã (Rial ≈ 0,000012 BR)
+                Taiwan (Dólar Taiwanês ≈ 0,16 BRL)
+                Indonésia (Rupia ≈ 0,00032 BRL)
+                Turquia (Lira Turca ≈ 0,18 BRL)
+                Argentina (Peso Argentino ≈ 0,014 BRL)
+                Estados Unidos (Dólar ≈ 5,00 BRL)
+                Canadá (Dólar Canadense ≈ 3,70 BRL)
+                Rússia (Rublo ≈ 0,055 BRL)`)
+    }
+</script>
