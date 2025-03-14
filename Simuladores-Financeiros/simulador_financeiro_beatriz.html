@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Quantidade de grãos de soja produzidos: <br>
+    <input type="text" id="input_qtdGraos_produzidos"> <br><br>
+    Quantidade de grãos perdidos no armazenamento: <br>
+    <input type="text" id="input_qtdGraos_perdidos"> <br><br>
+    Qual valor da saca de grãos ( saca = 60kg) <br>
+    <input type="text" id="input_valorSaca"> <br>
+    <button onclick="calcular()">Calcular perdas e ganhos</button>
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+function calcular(){
+
+ var qtdSoja_produzido = Number(input_qtdGraos_produzidos.value);
+ var qtdSoja_perdido = Number(input_qtdGraos_perdidos.value);
+ var valorSaca = Number(input_valorSaca.value);
+ 
+ var quantidade_sacas_semPerda =  Number(input_qtdGraos_produzidos.value)/60
+ var quantidade_sacas_comPerda = (Number(input_qtdGraos_produzidos.value) - Number(input_qtdGraos_perdidos.value)/60)
+
+ var ReceitaTotal_produzido = qtdSoja_produzido*valorSaca ;
+ var Receita_perda =  qtdSoja_perdido* valorSaca ;
+ var Receita_producao_menos_perda = (ReceitaTotal_produzido - Receita_perda )
+
+
+ div_mensagem.innerHTML =` 
+ Quantidade de sacas produzidas sem perda: ${quantidade_sacas_semPerda } <br>
+ Quantidade de sacas produzidas com perda: ${quantidade_sacas_comPerda} <br>
+ Valor da saca: ${valorSaca} <br
+ 
+ Prejuízo da perda dos grãos: ${Receita_perda} <br>
+ Receita da produção menos a perda: ${Receita_producao_menos_perda} <br>
+ Sua receita total sem a perda dos grãos no armazenamento: ${ReceitaTotal_produzido} <br>
+ `
+
+}
+
+
+
+
+</script>
