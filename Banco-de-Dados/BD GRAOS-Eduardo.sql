@@ -17,11 +17,11 @@ CREATE TABLE login (
     -- constraint chkNvlAcesso check (nvlAcesso in('admin','user'))
 );
 INSERT INTO login (nomeEmpresa, senha, cnpj, email, UFestado, cidade, cep) VALUES 
-	('SoftWave', 'minhaSenha123', '45678912000122', 'pedro.almeida@email.com', 'RS', 'Porto Alegre', '90000000'),  
-	('CodeMasters', 'seguranca456', '99123456000133', 'larissa.fonseca@email.com', 'SC', 'Florianópolis', '88000000'),  
-	('CyberNet', 'andre789', '11223344000144', 'andre.luiz@email.com', 'PR', 'Curitiba', '80000000'),  
-	('NextGenTech', 'nextGenPass', '22334556000155', 'susana.martins@email.com', 'BA', 'Salvador', '40000000'),  
-	('InovaSoft', 'marcosSenha', '33445667000166', 'marcos.lima@email.com', 'PE', 'Recife', '50000000');
+	('SoftWave', 'minhaSenha123', '75111946000124', 'pedro.almeida@email.com', 'RS', 'Porto Alegre', '90000000'),  
+	('CodeMasters', 'seguranca456', '37281060000130', 'larissa.fonseca@email.com', 'SC', 'Florianópolis', '88000000'),  
+	('CyberNet', 'andre789', '06762026000153', 'andre.luiz@email.com', 'PR', 'Curitiba', '80000000'),  
+	('NextGenTech', 'nextGenPass', '09491417000179', 'susana.martins@email.com', 'BA', 'Salvador', '40000000'),  
+	('InovaSoft', 'marcosSenha', '94163378000150', 'marcos.lima@email.com', 'PE', 'Recife', '50000000');
 
 UPDATE login SET nomeEmpresa = 'SojaPlus' WHERE idEmpresa = 2;
 DELETE FROM login WHERE idEmpresa = 5;
