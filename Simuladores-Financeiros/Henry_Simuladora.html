@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: cadetblue;">
+    <h1 style="text-align: center;">Calculadora financeira</h1>
+    
+    <div style="text-align: center;">Informe a quantidade de saca de 60 kg que você planta:
+    <br>
+    <input type="number" id="kg">
+    <br><br>
+    Informe a quantidade de perca por mal armazenamento:
+    <br>
+    <input type="number" id="perda">
+    <br><br>
+    <button onclick="analisar()">Analisar</button>
+    <div id="mens"></div></div>
+
+</body>
+</html>
+
+<script>
+function analisar(){//1100, 220
+    var QTD = Number(kg.value)
+    var Perda = Number(perda.value)
+    saca = QTD * 110
+    QTD_Perdida = (Perda / QTD) * 100 
+    
+    if (Perda <= 0) {
+        mens.innerHTML = `Quando você planta ${QTD} sacas de 60 kg, poderá ganhar até R$ ${saca}.`
+    } else {
+        mens.innerHTML = `Quando você planta ${QTD} sacas de 60 kg, poderá ganhar até R$ ${saca}, mas com a perda de ${Perda} saca, se reduz para ${QTD_Perdida} % de ganho possivel, sendo R$ ${((QTD * 110) - (Perda * 110))}.`
+        
+    }
+
+
+
+}
+
+
+
+</script>
