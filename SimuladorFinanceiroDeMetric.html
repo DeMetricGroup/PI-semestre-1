@@ -17,33 +17,22 @@
         <option value="Silos bolsas">Silos bolsas</option>
         <option value="Silos concreto">Silos concreto</option>
     </select><br><br>
-    
-    2. Qual a unidade de medida de comercialização?<br>
-    (quilograma, toneladas, sacas, bushel) <br>
 
-    <select id="select_medida">Unidade de Medida
-        <option value=" ">Selecione a unidade de medida</option>
-        <option value="quilograma">quilograma</option>
-        <option value="tomeladas">tomeladas</option>
-        <option value="sacas">sacas</option>
-        <option value="bushel">bushel</option>
-    </select><br><br>
+    2. Sobre a perda de grãos, você teria o controle?
+    <select id="select_controle" onchange="analise()">
+        <option value=" ">Selecione</option>
+        <option value="sim">Sim</option>
+        <option value="não">Não</option>
+    </select>
+    <br><br>
 
-    3. Qual a sua produção/armazenagem mensal?
-    <br><input type="number" id="input_producao"><br><br>
 
-    4. Do total produzido, quanto é perdido por mês?<br>
-    (De acorco a unidade de medida escolhida)
-    <br><input type="number" id="input_perdido"><br><br>
-
-    5. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
-    (De acorco a unidade de medida escolhida)
-    <br><input type="number" id="input_perdaArmaz"><br><br>
+    <div id="div_mensagem"></div>
 
     <br><br><br>
     <button onclick="calcular()">Calcular</button><br>
 
-    <div id="div_mensagem"></div>
+    <div id="div_mensagem2"></div>
    
 </center></font>
 </body>
@@ -65,9 +54,7 @@
         var bushel = 48.57;
         
         var porcentagemPerda = perdaArmaz * 100 / producao;
-        var prejuizo = 0;
-
-        var
+        var prejuizo = 0; 
 
             if( medida == "quilograma") {
                 prejuizo = perdaArmaz *quilograma;
@@ -82,19 +69,57 @@
             }
 
 
-        div_mensagem.innerHTML = `De sua produção/armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos.` <br>  
-        `Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo},00 </b> da sua produção/armazenagem teriam sido salvos.
+        div_mensagem2.innerHTML = `De sua produção/armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
+        Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo},00 </b> da sua produção/armazenagem teriam sido salvos.
         <br><br>
 
-        Informação de valor: <br>
+        Informação de valor: <br><br>
         1 tonelada = 1.000 kg<br>
         1 Saca= 60 kg<br>
         1 Bushel = 27,2155 kg
-       
-        Valores médios utilizados: <br>
+        <br><br>
+        Valores médios utilizados: <br><br>
         Saca - R$ 114,00 <br>
         Tonelada - R$ 1780,00 <br>
         Quilo - R$ 1,9 <br>
         Bushel - R$ 48,57 <br>
         `;
         }
+        
+        
+        function analise() {
+            var resposta = select_controle.value;
+
+            if (resposta == "sim") {
+                div_mensagem.innerHTML= `
+              3. Qual a unidade de medida de comercialização?<br>
+                (quilograma, toneladas, sacas, bushel) <br>
+
+                <select id="select_medida">Unidade de Medida
+                    <option value=" ">Selecione a unidade de medida</option>
+                    <option value="quilograma">quilograma</option>
+                    <option value="tomeladas">tomeladas</option>
+                    <option value="sacas">sacas</option>
+                    <option value="bushel">bushel</option>
+                </select><br><br>
+
+                4. Qual a sua produção/armazenagem mensal?
+                <br><input type="number" id="input_producao"><br><br>
+
+                5. Do total produzido, quanto é perdido por mês?<br>
+                (De acorco a unidade de medida escolhida)
+                <br><input type="number" id="input_perdido"><br><br>
+
+                6. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
+                (De acorco a unidade de medida escolhida)
+                <br><input type="number" id="input_perdaArmaz"><br><br>
+
+                    `;  
+            } else {
+                div_mensagem.innerHTML = ` `;
+            }
+          
+        }
+
+        
+</script>
