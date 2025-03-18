@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador financeiro (por Vique Peixoto)</title>
+</head>
+
+<body style="background-color: palegreen">
+    <div align="center">
+        <h3 style="color:#074d69">Insira o valor produzido no mês passado.</h3>
+        <input type="number" id="idRendaAnterior">
+        <br><br>
+
+        <h3 style="color: #074d69">Agora, insira o valor produzido nesse mês.</h3>
+        <input type="text" id="idRendaAtual">
+        <br><br>
+
+        <h3 style="color: #074d69">O seu armazém ou silo foi monitorado semanalmente como exigido pela CONAB nos últimos
+            três meses?</h3>
+        <select id="idMonitoramento">
+            <option>Sim</option>
+            <option>Não</option>
+        </select>
+        <br><br>
+
+        <button onclick="calcular()">Analisar informações</button>
+        <br><br>
+
+        <div id="divMensagem"></div>
+</body>
+
+</html>
+
+<script>
+    function calcular() {
+        var rendaAnterior = Number(idRendaAnterior.value);
+        var rendaAtual = Number(idRendaAtual.value);
+        var monitorado = idMonitoramento.value;
+
+        if (rendaAnterior > rendaAtual && monitorado == "Sim") {
+            divMensagem.innerHTML = `<h3 style="color: #074d69">Seu negócio teve uma diferença de R$${rendaAnterior - rendaAtual} do mês anterior para o atual. O seu rendimento foi menor, mas não é irregular. Nós ainda podemos economizar muito.</h3>`
+        } else if (rendaAnterior > rendaAtual && monitorado == "Não") {
+            divMensagem.innerHTML = `<h3 style="color: #074d69">Seu negócio teve uma diferença de R$${rendaAnterior - rendaAtual} do mês anterior para o atual.<br>Com o monitoramento constante, recomendado pela Embrapa, seu negócio podia ter salvo pelo menos 20% dessa perda total, igual a R$${(rendaAnterior + (rendaAnterior * 0.2)) - rendaAtual}.</h3>`
+        } else if (rendaAnterior < rendaAtual && monitorado == "Sim") {
+            divMensagem.innerHTML = `<h3 style="color: #074d69">Seu negócio teve uma diferença de R$${rendaAtual - rendaAnterior} do mês anterior para o atual. Conosco, seu negócio está em boas mãos.</h3>`
+        } else {
+            divMensagem.innerHTML = `<h3 style="color: #074d69">Seu negócio teve uma diferença de R$${rendaAtual - rendaAnterior} do mês anterior para o atual. Os valores são estáveis, mas com a incerteza dentro do armazenamento, você pode fazer melhor.</h3>`
+        }
+    }
+</script>

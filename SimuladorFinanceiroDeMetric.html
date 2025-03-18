@@ -9,7 +9,16 @@
    
     <h1 style="color:rgb(0, 0, 0)">Simulador Financeiro</h1>
    
-    1. Qual a unidade de medida de comercialização?<br>
+    1. Qual é o seu tipo de armazenamento?
+    <select id="select_armazem">
+        <option value=" ">Selecione o tipo de armazem</option>
+        <option value="Silo convencional">Silo convencional</option>
+        <option value="Silo metalico">Silo metalico</option>
+        <option value="Silos bolsas">Silos bolsas</option>
+        <option value="Silos concreto">Silos concreto</option>
+    </select><br><br>
+    
+    2. Qual a unidade de medida de comercialização?<br>
     (quilograma, toneladas, sacas, bushel) <br>
 
     <select id="select_medida">Unidade de Medida
@@ -20,14 +29,14 @@
         <option value="bushel">bushel</option>
     </select><br><br>
 
-    2. Qual a sua produção/armazenagem mensal?
+    3. Qual a sua produção/armazenagem mensal?
     <br><input type="number" id="input_producao"><br><br>
 
-    3. Do total produzido, quanto é perdido por mês?<br>
+    4. Do total produzido, quanto é perdido por mês?<br>
     (De acorco a unidade de medida escolhida)
     <br><input type="number" id="input_perdido"><br><br>
 
-    4. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
+    5. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
     (De acorco a unidade de medida escolhida)
     <br><input type="number" id="input_perdaArmaz"><br><br>
 
@@ -43,16 +52,22 @@
 <script>
         function calcular(){
 
-        var medida = (select_medida.value);
+        var medida = select_medida.value;
+        var armazem = select_armazem.value;
+        
         var producao = Number(input_producao.value);    // Produção total
         var perdido = Number(input_perdido.value);  
         var perdaArmaz = Number(input_perdaArmaz.value); //Perda por conta da umidade
-        var prejuizo = 0;
+        
         var quilograma = 1.9;
         var tonelada = 1780;
         var saca = 114;
         var bushel = 48.57;
+        
         var porcentagemPerda = perdaArmaz * 100 / producao;
+        var prejuizo = 0;
+
+        var
 
             if( medida == "quilograma") {
                 prejuizo = perdaArmaz *quilograma;
