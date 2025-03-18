@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h2>Simulador Financeiro</h2>
+
+Quantidade de soja produzida no último ano:
+<br>
+<input type="number" id="ipt_totalProduzidido" placeholder="kg"> 
+<br><br>
+
+Insira a perda total de soja no último ano (kg):
+<br>
+<input type="number" id="ipt_perdaTotal" placeholder="Perda total">
+<br><br>
+
+Há dados da porcentagem perdida devido à umidade?
+<br>
+<input type="text" id="ipt_dados">
+<br><br>
+
+Se sim, insira o valor:
+<br>
+<input type="number" id="ipt_porcentagem" placeholder="%">
+<br><br>
+
+Qual era a cotação da soja?
+<br>
+<input type="number" id="ipt_cotacao" placeholder="R$">
+
+<!-- <h3>Planejamento</h3>
+
+Insira a umidade máxima e mínima permitidas para o tempo de armazenamento da soja:
+<br>
+<input type="number" id="ipt_max" placeholder="Máximo">
+<input type="number" id="ipt_min" placeholder="Mínimo">
+<br><br>
+
+Umidade atual da soja:
+<br>
+<input type="number" id="ipt_umAtual" placeholder="%">
+<br><br>
+
+Cotação atual da soja:
+<br>
+<input type="number" id="ipt_cotacaoAtual" placeholder="R$">
+<br><br> -->
+
+<button onclick="calcular()">Calcular perdas</button>
+
+<div id="div_texto"></div>
+
+</body>
+</html>
+
+<script>
+
+var sacas = Number(60);
+var porcentagemGeral = Number(20);
+var perdaUm = 0;
+
+function calcular() {
+    //simulador
+    var totalProduzido = Number(ipt_totalProduzidido.value)
+    var perdaTotal = Number(ipt_perdaTotal.value);
+    var dados = ipt_dados.value;
+    var porcentagem = Number(ipt_porcentagem.value);
+    var cotacao = Number(ipt_cotacao.value);
+   // var perdaPorcentagem = perdaTotal * 100 / totalProduzido;
+
+    //planejamento 
+    /*var max = Number(ipt_max.value);
+    var min = Number(ipt_min.value);
+    var umAtual = Number(ipt_umAtual);
+    var cotAtual = Number(ipt_cotacaoAtual);*/
+
+    //calculo simulador
+    if (dados == 'sim') {
+        perdaUm = (porcentagem / 100) * perdaTotal;
+        var pctUmidadePeloTotal = perdaUm * 100 / totalProduzido;
+        div_texto.innerHTML =
+                                `Com o total produzido de ${totalProduzido}kg, houve uma perda por conta da umidade de ${perdaUm}Kg. <br>
+                                Equivalente a ${pctUmidadePeloTotal}% do produzido, `;
+    }
+    else if (dados == 'não'){
+        perdaUm = (porcentagemGeral / 100) * perdaTotal;
+        var pctUmidadePeloTotal = perdaUm * 100 / totalProduzido;
+         div_texto.innerHTML = 
+                                `Com o total produzido de ${totalProduzido}kg, pôde ter ocorrido uma perda de 20% da produção por conta da humidade, <br> que equivale a ${perdaUm}. Equivalente a ${pctUmidadePeloTotal}% do produzido, `;
+         
+    }
+    else {
+        alert  (`Insira um valor válido`);
+    }
+
+    // simulador perda financeira 
+    if (dados == 'sim')
+        {var perdaFinanceira = perdaUm * cotacao;
+        var perdaSacas = perdaUm / sacas;
+        div_texto.innerHTML += `a economia utilizando o monitoramento seria de R$${perdaFinanceira} e ${perdaSacas} sacas.`;
+    }
+    else if (dados == 'não')
+        {var perdaFinanceira = perdaUm * cotacao;
+        var perdaSacas = perdaUm / sacas;
+        div_texto.innerHTML += `a economia utilizando o monitoramento seria de R$${perdaFinanceira} e ${perdaSacas} sacas.`;
+    }
+    else {
+        div_texto.innerHTML = `Valores inseridos inválidos. `;
+    }
+
+    // planejaamento
+    /*if (umAtual < min){
+        var diferenca
+    }*/
+}
+
+</script>
