@@ -48,30 +48,55 @@
         var perdido = Number(input_perdido.value);  
         var perdaArmaz = Number(input_perdaArmaz.value); //Perda por conta da umidade
         
-        var quilograma = 1.9;
         var tonelada = 1780;
-        var saca = 114;
+        var saca = 132;
         var bushel = 48.57;
+
+        var valorQuilograma = 0;
+        var valorTonelada = 0;
+        var valorSaca = 0;
+        var valorBushel = 0;
         
         var porcentagemPerda = perdaArmaz * 100 / producao;
         var prejuizo = 0; 
 
-            if( medida == "quilograma") {
-                prejuizo = perdaArmaz *quilograma;
-            } else if (medida == "toneladas") {
+
+            if (medida == "toneladas") {
                 prejuizo = perdaArmaz *tonelada;
+
+                valorQuilograma = (producao*1000)*quilograma;
+                valorTonelada = (producao)*tonelada;
+                valorSaca = ((producao*1000)/60)*saca;
+                valorBushel = ((producao*1000)/27,216)*bushel;
+
             } else if (medida == "sacas") {
                 prejuizo = perdaArmaz * saca;
+
+                valorQuilograma = (producao*60)*quilograma;
+                valorTonelada = ((producao*60)/1000)*tonelada;
+                valorSaca = (producao)*saca;
+                valorBushel = ((producao*60)/27,216)*bushel;
+
             } else if (medida == "bushel"){
                 prejuizo = perdaArmaz * bushel;
+
+                valorQuilograma = (producao*27,216)*quilograma;
+                valorTonelada = ((producao*27,216)/1000)*tonelada;
+                valorSaca = ((producao*27,216)/60)*saca;
+                valorBushel = (producao)*bushel;
+
             } else {
                 alert ("Erro! Selecione uma unidade de medida válida.");
             }
 
-
         div_mensagem2.innerHTML = `De sua produção/armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
         Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo},00 </b> da sua produção/armazenagem teriam sido salvos.
         <br><br>
+        Valores por metodo:<br>
+            Quilograma = R$${valorQuilograma}<br>
+            Tonelada = R$${valorTonelada}<br>
+            Saca = R$${valorSaca}<br>
+            Bushel = R$${valorBushel}<br><br>
 
         Informação de valor: <br><br>
         1 tonelada = 1.000 kg<br>
@@ -97,7 +122,6 @@
 
                 <select id="select_medida">Unidade de Medida
                     <option value=" ">Selecione a unidade de medida</option>
-                    <option value="quilograma">quilograma</option>
                     <option value="toneladas">toneladas</option>
                     <option value="sacas">sacas</option>
                     <option value="bushel">bushel</option>
@@ -116,7 +140,20 @@
 
                     `;  
             } else {
-                div_mensagem.innerHTML = ` `;
+                div_mensagem.innerHTML = `
+                3. Qual a unidade de medida de comercialização?<br>
+                (quilograma, toneladas, sacas, bushel) <br>
+
+                <select id="select_medida">Unidade de Medida
+                    <option value=" ">Selecione a unidade de medida</option>
+                    <option value="toneladas">toneladas</option>
+                    <option value="sacas">sacas</option>
+                    <option value="bushel">bushel</option>
+                </select><br><br>
+
+                4. Qual a sua produção/armazenagem mensal?
+                <br><input type="number" id="input_producao"><br><br>
+                `;
             }
           
         }
