@@ -30,7 +30,7 @@
     <div id="div_mensagem"></div>
 
     <br>
-    <button onclick="calcular()">Calcular</button><br>
+    
 
     <div id="div_mensagem2"></div>
    
@@ -39,16 +39,17 @@
 </html>
 
 <script>
+    
         function calcular(){
 
         var medida = select_medida.value;
         var armazem = select_armazem.value;
         
-        var producao = Number(input_producao.value);    // Produção total
+        var producao = Number(input_producao.value);                // Produção total
         var perdido = Number(input_perdido.value);  
-        var perdaArmaz = Number(input_perdaArmaz.value); //Perda por conta da umidade
+        var perdaArmaz = Number(input_perdaArmaz.value);            //Perda por conta da umidade
         
-        var tonelada = 1780;
+        var tonelada = 1784.67;
         var saca = 132;
         var bushel = 48.57;
 
@@ -86,7 +87,7 @@
             }
 
         div_mensagem2.innerHTML = `De sua armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
-        Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo},00 </b> da sua produção/armazenagem teriam sido salvos.
+        Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo} </b> da sua armazenagem teriam sido salvos.
         <br><br>
         Valores por metodo:<br>
             Tonelada = R$${valorTonelada}<br>
@@ -121,7 +122,7 @@
                     <option value="bushel">bushel</option>
                 </select><br><br>
 
-                4. Qual a sua produção/armazenagem mensal?
+                4. Qual a sua armazenagem mensal?
                 <br><input type="number" id="input_producao"><br><br>
 
                 5. Do total produzido, quanto é perdido por mês?<br>
@@ -131,7 +132,7 @@
                 6. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
                 (De acorco a unidade de medida escolhida)
                 <br><input type="number" id="input_perdaArmaz"><br><br>
-
+                <button onclick="calcular()">Calcular</button><br>
                     `;  
             } else {
                 div_mensagem.innerHTML = `
@@ -145,12 +146,77 @@
                     <option value="bushel">bushel</option>
                 </select><br><br>
 
-                4. Qual a sua produção/armazenagem mensal?
+                4. Qual a sua armazenagem mensal?
                 <br><input type="number" id="input_producao"><br><br>
+                 <button onclick="calcular2()">Calcular</button><br>
                 `;
+
             }
           
         }
 
+        function calcular2() {
+            
+        var medida = select_medida.value;
+        var armazem = select_armazem.value;
         
+        var producao = Number(input_producao.value);                // Produção total
+        var perdaArmaz = producao*0.8;            //Perda por conta da umidade
+        
+        var tonelada = 1784.67;
+        var saca = 132;
+        var bushel = 48.57;
+
+        var valorTonelada = 0;
+        var valorSaca = 0;
+        var valorBushel = 0;
+        
+        var porcentagemPerda = 20;
+        var prejuizo = 0; 
+
+
+            if (medida == "toneladas") {
+                prejuizo = perdaArmaz *tonelada;
+
+                valorTonelada = (producao)*tonelada;
+                valorSaca = ((producao*1000)/60)*saca;
+                valorBushel = ((producao*1000)/27,216)*bushel;
+
+            } else if (medida == "sacas") {
+                prejuizo = perdaArmaz * saca;
+
+                valorTonelada = ((producao*60)/1000)*tonelada;
+                valorSaca = (producao)*saca;
+                valorBushel = ((producao*60)/27,216)*bushel;
+
+            } else if (medida == "bushel"){
+                prejuizo = perdaArmaz * bushel;
+
+                valorTonelada = ((producao*27,216)/1000)*tonelada;
+                valorSaca = ((producao*27,216)/60)*saca;
+                valorBushel = (producao)*bushel;
+
+            } else {
+                alert ("Erro! Selecione uma unidade de medida válida.");
+            }
+
+        div_mensagem2.innerHTML = `De sua armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
+        Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo} </b> da sua armazenagem teriam sido salvos.
+        <br><br>
+        Valores por metodo:<br>
+            Tonelada = R$${valorTonelada}<br>
+            Saca = R$${valorSaca}<br>
+            Bushel = R$${valorBushel}<br><br>
+
+        Informação de valor: <br><br>
+        1 tonelada = 1.000 kg<br>
+        1 Saca= 60 kg<br>
+        1 Bushel = 27,2155 kg
+        <br><br>
+        Valores médios utilizados: <br><br>
+        Saca - R$ 114,00 <br>
+        Tonelada - R$ 1780,00 <br>
+        Bushel - R$ 48,57 <br>
+        `;
+        }
 </script>
