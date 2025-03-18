@@ -4,144 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador financeiro</title>
-</head>
-<body>
-    <h2>Simulador Financeiro</h2>
+</head> <font face="Verdana">
+<body style="background-color:#b8dad8;"> <center>
+   
+    <h1 style="color:rgb(0, 0, 0)">Simulador Financeiro</h1>
+   
+    1. Qual a unidade de medida de comercialização?<br>
+    (quilograma, toneladas, sacas, bushel) <br>
 
-    Informe a unidade de medida que é comercializado (quilograma, toneladas, sacas, bushel):
-    <input type="text" id="id_medida">
+    <select id="select_medida">Unidade de Medida
+        <option value=" ">Selecione a unidade de medida</option>
+        <option value="quilograma">quilograma</option>
+        <option value="tomeladas">tomeladas</option>
+        <option value="sacas">sacas</option>
+        <option value="bushel">bushel</option>
+    </select><br><br>
 
-    <button onclick="verificar()">Prosseguir</button>
-    <br> 
+    2. Qual a sua produção/armazenagem mensal?
+    <br><input type="number" id="input_producao"><br><br>
 
-    <button onclick="calcular()">Calcular</button>
+    3. Do total produzido, quanto é perdido por mês?<br>
+    (De acorco a unidade de medida escolhida)
+    <br><input type="number" id="input_perdido"><br><br>
+
+    4. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
+    (De acorco a unidade de medida escolhida)
+    <br><input type="number" id="input_perdaArmaz"><br><br>
+
+    <br><br><br>
+    <button onclick="calcular()">Calcular</button><br>
+
     <div id="div_mensagem"></div>
-    <div id="div_mensagem2"></div>
-    
+   
+</center></font>
 </body>
 </html>
 
 <script>
-    //Variavel global
-    var medida = 0;
+        function calcular(){
 
-    function verificar(){
-        //Definir varivel de medida
-        medida = id_medida.value;
+        var medida = (select_medida.value);
+        var producao = Number(input_producao.value);    // Produção total
+        var perdido = Number(input_perdido.value);  
+        var perdaArmaz = Number(input_perdaArmaz.value); //Perda por conta da umidade
+        var prejuizo = 0;
+        var quilograma = 1.9;
+        var tonelada = 1780;
+        var saca = 114;
+        var bushel = 48.57;
+        var porcentagemPerda = perdaArmaz * 100 / producao;
 
-        //Definir texto para cada medida
-        
-            if (medida == "quilograma") {
-        
-            div_mensagem.innerHTML = `  <br>Informe o valor você que é produzido em quilograma: 
-                                        <input type="number" id="id_valor">
-                                        <br>Informe a quantidade perdida por conta da umidade em quilograma: 
-                                        <input type="number" id="id_perda">
-                                        `;
-
+            if( medida == "quilograma") {
+                prejuizo = perdaArmaz *quilograma;
             } else if (medida == "toneladas") {
-
-                div_mensagem.innerHTML = `  <br>Informe o valor você que é produzido em toneladas: 
-                                            <input type="number" id="id_valor">
-                                            <br>Informe a quantidade perdida por conta da umidade em toneladas: 
-                                            <input type="number" id="id_perda">
-                                            <button onclick="calcular()">Calcular</button>
-                                            <div id="div_mensagem2"></div>`;
-
-            } else if (medida == "sacas") {
-
-                div_mensagem.innerHTML = `  <br>Informe o valor você que é produzido em sacas: 
-                                            <input type="number" id="id_valor">
-                                            <br>Informe a quantidade perdida por conta da umidade em sacas: 
-                                            <input type="number" id="id_perda">
-                                            <button onclick="calcular()">Calcular</button>
-                                            <div id="div_mensagem2"></div>`;
-                
-            } else if (medida == "bushel" ){
-
-                div_mensagem.innerHTML = `  <br>Informe o valor você que é produzido em bushel: 
-                                            <input type="number" id="id_valor">
-                                            <br>Informe a quantidade perdida por conta da umidade em bushel: 
-                                            <input type="number" id="id_perda">
-                                            <button onclick="calcular()">Calcular</button>
-                                            <div id="div_mensagem2"></div>`;
-
+                prejuizo = perdaArmaz *tonelada;
+            } else if (medida == "saca") {
+                prejuizo = perdaArmaz * saca;
+            } else if (medida == "bushel"){
+                prejuizo = perdaArmaz * bushel;
             } else {
-                alert ("Erro!!");
-                alert ("Insira um valor valido!!!");
+                alert ("Erro! Selecione uma unidade de medida válida.");
             }
-        }
-
-    function calcular(){
-
-        var perda = Number(id_perda.value);
-        var total = Number(id_valor.value);
- 
-       /* var saca = total/60;
-        var bushel = total/27.2;
-        var sacaPerd = perda/60;
-        var bushelPerd = perda/27.2; */
-        
-        // Calculando a porcentagem da perda da Safra
-        var porcPerda = (perda/total)*100;
 
 
-        // Zerando a div
-        div_mensagem.innerHTML = " ";
-        
-
-        div_mensagem.innerHTML += `<br>
-        Você tem uma perda de ${porcPerda}% da sua safra total <br>`;
-
-        if (medida == "quilograma") {
-            var porcPerda = (perda/totalKg)*100;
-
-            div_mensagem.innerHTML = ``;
-
-        } else if (medida == "toneladas") {
-            
-
-            div_mensagem.innerHTML = ``;
-
-        } else if (medida == "sacas") {
-            
-            div_mensagem.innerHTML = ``;
-            
-        } else if (medida == "bushel" ){
-            
-            div_mensagem.innerHTML = ``;
-
-
-
-
-
-
-
-
-
-
-            perdaMoeda = (perda/1000)*precoTon;
-            div_mensagem.innerHTML += `O valor em real perdido é de ${perdaMoeda}`;
-        
-
-        div_mensagem.innerHTML += `<br><br>
-        Toneladas perdidas: ${perda/1000} <br>
-        Sacas perdidas: ${sacaPerd} <br>
-        Bushel Perdidas: ${bushelPerd} <br>
+        div_mensagem.innerHTML = `De sua produção/armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos.` <br>  
+        `Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo},00 </b> da sua produção/armazenagem teriam sido salvos.
         <br><br>
 
         Informação de valor: <br>
         1 tonelada = 1.000 kg<br>
         1 Saca= 60 kg<br>
         1 Bushel = 27,2155 kg
-
-        Valor Medio da saca (Valores conforme o momento):
-        Tonelada = R$ 1784.67;
-        Saca = R$ 114,00
-        Bushel = R$ 48.57;
-        
+       
+        Valores médios utilizados: <br>
+        Saca - R$ 114,00 <br>
+        Tonelada - R$ 1780,00 <br>
+        Quilo - R$ 1,9 <br>
+        Bushel - R$ 48,57 <br>
         `;
-    }}
-
-
-</script>
+        }
