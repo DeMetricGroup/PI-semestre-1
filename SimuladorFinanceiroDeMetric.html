@@ -52,7 +52,6 @@
         var saca = 132;
         var bushel = 48.57;
 
-        var valorQuilograma = 0;
         var valorTonelada = 0;
         var valorSaca = 0;
         var valorBushel = 0;
@@ -64,7 +63,6 @@
             if (medida == "toneladas") {
                 prejuizo = perdaArmaz *tonelada;
 
-                valorQuilograma = (producao*1000)*quilograma;
                 valorTonelada = (producao)*tonelada;
                 valorSaca = ((producao*1000)/60)*saca;
                 valorBushel = ((producao*1000)/27,216)*bushel;
@@ -72,7 +70,6 @@
             } else if (medida == "sacas") {
                 prejuizo = perdaArmaz * saca;
 
-                valorQuilograma = (producao*60)*quilograma;
                 valorTonelada = ((producao*60)/1000)*tonelada;
                 valorSaca = (producao)*saca;
                 valorBushel = ((producao*60)/27,216)*bushel;
@@ -80,7 +77,6 @@
             } else if (medida == "bushel"){
                 prejuizo = perdaArmaz * bushel;
 
-                valorQuilograma = (producao*27,216)*quilograma;
                 valorTonelada = ((producao*27,216)/1000)*tonelada;
                 valorSaca = ((producao*27,216)/60)*saca;
                 valorBushel = (producao)*bushel;
@@ -89,11 +85,10 @@
                 alert ("Erro! Selecione uma unidade de medida válida.");
             }
 
-        div_mensagem2.innerHTML = `De sua produção/armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
+        div_mensagem2.innerHTML = `De sua armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
         Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo},00 </b> da sua produção/armazenagem teriam sido salvos.
         <br><br>
         Valores por metodo:<br>
-            Quilograma = R$${valorQuilograma}<br>
             Tonelada = R$${valorTonelada}<br>
             Saca = R$${valorSaca}<br>
             Bushel = R$${valorBushel}<br><br>
@@ -106,7 +101,6 @@
         Valores médios utilizados: <br><br>
         Saca - R$ 114,00 <br>
         Tonelada - R$ 1780,00 <br>
-        Quilo - R$ 1,9 <br>
         Bushel - R$ 48,57 <br>
         `;
         }
