@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: rgb(7, 76, 122);">
+    <center>
+        <h1 style="color: rgba(255, 255, 255, 0.966); background-color: rgba(65, 65, 190, 0.685);margin: 25px; margin-left: 55px; margin-right: 55px;padding: 10px; font-family: Arial, Helvetica, sans-serif;">Simulador financeiro</h1>
+        <p style="color: aliceblue; font-family: Arial, Helvetica, sans-serif;">Insira valor da saca de soja compada:</p>
+        <input type="number" placeholder="R$" id="input_valor" style="color:black; background-color: aliceblue; padding: 10px;">
+        <br><br>
+        <p style="color: aliceblue; font-family: Arial, Helvetica, sans-serif;">Insira quantidade de sacas compradas por mês:</p>
+        <input type="number" placeholder="KG" id="input_saca" style="color: black; background-color: aliceblue; padding: 10px;">
+        <br><br>
+        <p style="color: aliceblue; font-family: Arial, Helvetica, sans-serif;">Insira quantidade de sacas perdidas por mês:</p>
+        <input type="number" placeholder="KG" id="input_perda" style="color: black; background-color: aliceblue; padding: 10px;">
+        <br><br>
+        <button onclick="Calcular()" style="background-color: rgba(65, 65, 190, 0.685); color: aliceblue; padding: 10px;">Calcular</button>
+        <br><br>
+        <div id="div_mensagem" style="color:red; font-family: Arial, Helvetica, sans-serif;"></div>
+    </center> 
+</body>
+</html>
+<script>
+    function Calcular(){
+        var valor = Number(input_valor.value);
+        var saca = Number(input_saca.value);
+        var perda = Number(input_perda.value);
+        var valorTotal = valor * saca;
+        var perdaTotal = (saca - perda) * valorTotal
+        
+
+        div_mensagem.innerHTML = `Você gastou o total de R$${valorTotal} esse mês, e perdeu o total de R$${perdaTotal} com desperdício de sacas.`
+    }
+</script>
