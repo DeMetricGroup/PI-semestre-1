@@ -9,10 +9,10 @@
    
     <h1 style="color:rgb(0, 0, 0)">Simulador Financeiro</h1>
    
-    1. Qual é a capacidade máxima do seu armazenamento?
+    1. Qual é a capacidade máxima do seu armazenamento (em toneladas)?
     <br><input type="number" id="id_armMax" style="background-color:white; border:none; padding: 5px">
-    <br>
-    2. Sobre a perda de grãos, você teria o controle?
+    <br><br>
+    2. Sobre a perda de grãos, você tem um controle?<br>
     <select id="select_controle" onchange="analise()" style="background-color:white; color:black; border:none; padding:7px">
         <option value=" ">Selecione</option>
         <option value="sim">Sim</option>
@@ -34,7 +34,10 @@
         function calcular(){
 
         var medida = select_medida.value;
-        var armazem = id_armMax.value;
+
+        // Cálculo quantidade de sensores
+        var armazemTotal = (Number(id_armMax.value))*1000;
+        var sensorMaximo = armazemTotal/7700;                       // A Densidade da soja é 770kg/m² isso seria em 1 m² -> cada a 10 m² então 7700
         
         var producao = Number(input_producao.value);                // Produção total
         var perdaArmaz = Number(input_perdaArmaz.value);            //Perda por conta da umidade
@@ -77,7 +80,7 @@
             }
 
         div_mensagem2.innerHTML = `
-        Com base em sua capacidade de armazenamento, de ${producao} ${medida} de soja, ${porcentagemPerda}% transformou-se em perda, ou seja R$ ${prejuizo}. <br>Caso a solução da DeMetric, um sistema de monitoramento de temperatura e umidade, estivesse instalada em seu armazém, o equivalente a R$ ${prejuizo*0.6} que representa 60% de sua armazengem, poderiam ter sido salvos.<br>
+        Com base em sua capacidade de armazenamento, de ${producao} ${medida} de soja, ${porcentagemPerda.toFixed(2)}% transformou-se em perda, ou seja R$ ${prejuizo.toFixed(2)}. <br>Caso a solução da DeMetric, um sistema de monitoramento de temperatura e umidade, estivesse instalada em seu armazém, o equivalente a R$ ${(prejuizo*0.6).toFixed(2)} que representa 60% de sua armazengem, poderiam ter sido salvos.<br>
         
         <br>
         No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
@@ -87,9 +90,9 @@
         <tr>
             <td style="vertical-align: top; width: 33%;">
             Valores por método:<br>
-            Tonelada = R$${valorTonelada}<br>
-            Saca = R$${valorSaca}<br>
-            Bushel = R$${valorBushel}<br>
+            Tonelada = R$${valorTonelada.toFixed(2)}<br>
+            Saca = R$${valorSaca.toFixed(2)}<br>
+            Bushel = R$${valorBushel.toFixed(2)}<br>
             </td>
             <td style="vertical-align: top; width: 33%;">
             Informação de valor: <br>
@@ -125,6 +128,7 @@
                 </select><br><br>
 
                 4. Qual a sua armazenagem mensal?
+                (De acorco a unidade de medida escolhida)
                 <br><input type="number" id="input_producao" style="background-color:white; border:none; padding: 5px"><br><br>
 
                 5. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
@@ -144,7 +148,8 @@
                     <option value="bushel">bushel</option>
                 </select><br><br>
 
-                4. Qual a sua armazenagem mensal?
+                4. Qual a sua armazenagem mensal?<br>
+                (De acorco a unidade de medida escolhida)
                 <br><input type="number" id="input_producao"><br><br>
                  <button onclick="calcular2()" style="background-color:black; color: white; padding: 8px; border: none;">Calcular</button><br>
                 `;
@@ -156,11 +161,13 @@
         function calcular2() {
             
         var medida = select_medida.value;
-        var armazem = id_armMax.value;
+        var armazemTotal = (Number(id_armMax.value))*1000;
+    
         
         var producao = Number(input_producao.value);                // Produção total
         var perdaArmaz = producao*0.8;                              //Perda por conta da umidade
-        
+        var sensorMaximo = armazemTotal/7700;                       // A Densidade da soja é 770kg/m² isso seria em 1 m² -> cada a 10 m² então 7700
+
         var tonelada = 1784.67;
         var saca = 132;
         var bushel = 48.57;
@@ -198,18 +205,19 @@
                 alert ("Erro! Selecione uma unidade de medida válida.");
             }
 
-        div_mensagem2.innerHTML = `No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
-
-        Neste caso, relacionando sua capacidade atual e o cenário nacional de perda de 20%, com um sistema de monitoramento de temperatura e umidade instalado em seu armazém, R$ ${perdaArmaz} da sua armazenagem teriam sido salvos.
+        div_mensagem2.innerHTML = `No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e da temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
+        <br>
+        Neste caso, relacionando sua capacidade atual e o cenário nacional de perda de 20%, com um sistema de monitoramento de temperatura e umidade instalado em seu armazém, R$ ${perdaArmaz.toFixed(2)} da sua armazenagem teriam sido salvos.
         <br><br>
-
+        Quantidade estimada de sensores necessarios: ${sensorMaximo.toFixed(0)}.
+        <br><br>
     <table style="width: 50%; font-size: small;">
   <tr>
     <td style="vertical-align: top; width: 33%;">
       Valores por método:<br>
-      Tonelada = R$${valorTonelada}<br>
-      Saca = R$${valorSaca}<br>
-      Bushel = R$${valorBushel}<br>
+      Tonelada = R$${valorTonelada.toFixed(2)}<br>
+      Saca = R$${valorSaca.toFixed(2)}<br>
+      Bushel = R$${valorBushel.toFixed(2)}<br>
     </td>
     <td style="vertical-align: top; width: 33%;">
       Informação de valor: <br>
