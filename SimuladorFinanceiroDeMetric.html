@@ -9,17 +9,11 @@
    
     <h1 style="color:rgb(0, 0, 0)">Simulador Financeiro</h1>
    
-    1. Qual é o seu tipo de armazenamento?
-    <select id="select_armazem">
-        <option value=" ">Selecione o tipo de armazem</option>
-        <option value="Silo convencional">Silo convencional</option>
-        <option value="Silo metalico">Silo metalico</option>
-        <option value="Silos bolsas">Silos bolsas</option>
-        <option value="Silos concreto">Silos concreto</option>
-    </select><br><br>
-
+    1. Qual é a capacidade máxima do seu armazenamento?
+    <br><input type="number" id="id_armMax" style="background-color:white; border:none; padding: 5px">
+    <br>
     2. Sobre a perda de grãos, você teria o controle?
-    <select id="select_controle" onchange="analise()">
+    <select id="select_controle" onchange="analise()" style="background-color:white; color:black; border:none; padding:7px">
         <option value=" ">Selecione</option>
         <option value="sim">Sim</option>
         <option value="não">Não</option>
@@ -28,10 +22,7 @@
 
 
     <div id="div_mensagem"></div>
-
     <br>
-    
-
     <div id="div_mensagem2"></div>
    
 </center></font>
@@ -43,10 +34,9 @@
         function calcular(){
 
         var medida = select_medida.value;
-        var armazem = select_armazem.value;
+        var armazem = id_armMax.value;
         
         var producao = Number(input_producao.value);                // Produção total
-        var perdido = Number(input_perdido.value);  
         var perdaArmaz = Number(input_perdaArmaz.value);            //Perda por conta da umidade
         
         var tonelada = 1784.67;
@@ -86,11 +76,14 @@
                 alert ("Erro! Selecione uma unidade de medida válida.");
             }
 
-        div_mensagem2.innerHTML = `De sua armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
-        Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo} </b> da sua armazenagem teriam sido salvos.
+        div_mensagem2.innerHTML = `
+        Com base em sua capacidade de armazenamento, de ${producao} ${medida} de soja, ${porcentagemPerda}% transformou-se em perda, ou seja R$ ${prejuizo}. <br>Caso a solução da DeMetric, um sistema de monitoramento de temperatura e umidade, estivesse instalada em seu armazém, o equivalente a R$ ${prejuizo*0.6} que representa 60% de sua armazengem, poderiam ter sido salvos.<br>
+        
+        <br>
+        No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
         <br><br>
 
-        <table style="width: 100%; border-collapse: collapse;">
+        <table style="width: 50%;font-size: small;">
         <tr>
             <td style="vertical-align: top; width: 33%;">
             Valores por método:<br>
@@ -124,7 +117,7 @@
               3. Qual a unidade de medida de comercialização?<br>
                 (quilograma, toneladas, sacas, bushel) <br>
 
-                <select id="select_medida">Unidade de Medida
+                <select id="select_medida" style="background-color:white; color:black; border:none; padding:7px">Unidade de Medida
                     <option value=" ">Selecione a unidade de medida</option>
                     <option value="toneladas">toneladas</option>
                     <option value="sacas">sacas</option>
@@ -132,16 +125,12 @@
                 </select><br><br>
 
                 4. Qual a sua armazenagem mensal?
-                <br><input type="number" id="input_producao"><br><br>
+                <br><input type="number" id="input_producao" style="background-color:white; border:none; padding: 5px"><br><br>
 
-                5. Do total produzido, quanto é perdido por mês?<br>
+                5. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
                 (De acorco a unidade de medida escolhida)
-                <br><input type="number" id="input_perdido"><br><br>
-
-                6. Destas perdas, quanto provavelmente ocorre por problemas com armazenamento?<br>
-                (De acorco a unidade de medida escolhida)
-                <br><input type="number" id="input_perdaArmaz"><br><br>
-                <button onclick="calcular()">Calcular</button><br>
+                <br><input type="number" id="input_perdaArmaz" style="background-color:white; border:none; padding: 5px"><br><br>
+                <button onclick="calcular()" style="background-color:black; color: white; padding: 8px; border: none;">Calcular</button><br>
                     `;  
             } else {
                 div_mensagem.innerHTML = `
@@ -157,7 +146,7 @@
 
                 4. Qual a sua armazenagem mensal?
                 <br><input type="number" id="input_producao"><br><br>
-                 <button onclick="calcular2()">Calcular</button><br>
+                 <button onclick="calcular2()" style="background-color:black; color: white; padding: 8px; border: none;">Calcular</button><br>
                 `;
 
             }
@@ -167,10 +156,10 @@
         function calcular2() {
             
         var medida = select_medida.value;
-        var armazem = select_armazem.value;
+        var armazem = id_armMax.value;
         
         var producao = Number(input_producao.value);                // Produção total
-        var perdaArmaz = producao*0.8;            //Perda por conta da umidade
+        var perdaArmaz = producao*0.8;                              //Perda por conta da umidade
         
         var tonelada = 1784.67;
         var saca = 132;
@@ -209,11 +198,12 @@
                 alert ("Erro! Selecione uma unidade de medida válida.");
             }
 
-        div_mensagem2.innerHTML = `De sua armazenagem de <b> ${producao} </b> ${medida} de soja, <b style="color: red; font-size: 20px;"> ${porcentagemPerda}% </b> foram perdidos. <br>  
-        Caso um sistema de monitoramento de temperatura e umidade estivesse instalado em seu armazém, <b style="color: green; font-size: 20px;"> R$ ${prejuizo} </b> da sua armazenagem teriam sido salvos.
+        div_mensagem2.innerHTML = `No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
+
+        Neste caso, relacionando sua capacidade atual e o cenário nacional de perda de 20%, com um sistema de monitoramento de temperatura e umidade instalado em seu armazém, R$ ${perdaArmaz} da sua armazenagem teriam sido salvos.
         <br><br>
 
-    <table style="width: 100%; border-collapse: collapse;">
+    <table style="width: 50%; font-size: small;">
   <tr>
     <td style="vertical-align: top; width: 33%;">
       Valores por método:<br>
