@@ -90,10 +90,10 @@
         <table style="width: 50%;font-size: small;">
         <tr>
             <td style="vertical-align: top; width: 33%;">
-            Valores por método:<br>
-            Tonelada = R$${valorTonelada.toFixed(2)}<br>
-            Saca = R$${valorSaca.toFixed(2)}<br>
-            Bushel = R$${valorBushel.toFixed(2)}<br>
+            Valor médio utilizado: <br>
+            Saca - R$ ${saca} <br>
+            Tonelada - R$ ${tonelada} <br>
+            Bushel - R$ ${bushel} <br>
             </td>
             <td style="vertical-align: top; width: 33%;">
             Informação de valor: <br>
@@ -102,10 +102,10 @@
             1 Bushel = 27,2155 kg<br>
             </td>
             <td style="vertical-align: top; width: 33%;">
-            Valores médios utilizados: <br>
-            Saca - R$ 114,00 <br>
-            Tonelada - R$ 1780,00 <br>
-            Bushel - R$ 48,57 <br>
+            Valor médio do armazenamento atual:<br>
+            Tonelada = R$${valorTonelada.toFixed(2)}<br>
+            Saca = R$${valorSaca.toFixed(2)}<br>
+            Bushel = R$${valorBushel.toFixed(2)}<br>
             </td>
         </tr>
         </table>
@@ -166,12 +166,13 @@
     
         
         var producao = Number(input_producao.value);                // Produção total
-        var perdaArmaz = producao*0.8;                              //Perda por conta da umidade
+        var perdaArmaz = producao*0.2;                              //Perda por conta da umidade
         var sensorMaximo = armazemTotal/7700;                       // A Densidade da soja é 770kg/m² isso seria em 1 m² -> cada a 10 m² então 7700
 
-        var tonelada = 1784.67;
+        //Preço de marcado
+        var tonelada = 1784.67;                                     
         var saca = 132;
-        var bushel = 48.57;
+        var bushel = 55.06;
 
         var valorTonelada = 0;
         var valorSaca = 0;
@@ -186,20 +187,20 @@
 
                 valorTonelada = (producao)*tonelada;
                 valorSaca = ((producao*1000)/60)*saca;
-                valorBushel = ((producao*1000)/27,216)*bushel;
+                valorBushel = ((producao*1000)/27.216)*bushel;
 
             } else if (medida == "sacas") {
                 prejuizo = perdaArmaz * saca;
 
                 valorTonelada = ((producao*60)/1000)*tonelada;
                 valorSaca = (producao)*saca;
-                valorBushel = ((producao*60)/27,216)*bushel;
+                valorBushel = ((producao*60)/27.216)*bushel;
 
             } else if (medida == "bushel"){
                 prejuizo = perdaArmaz * bushel;
 
-                valorTonelada = ((producao*27,216)/1000)*tonelada;
-                valorSaca = ((producao*27,216)/60)*saca;
+                valorTonelada = ((producao*27.216)/1000)*tonelada;
+                valorSaca = ((producao*27.216)/60)*saca;
                 valorBushel = (producao)*bushel;
 
             } else {
@@ -208,29 +209,33 @@
 
         div_mensagem2.innerHTML = `No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e da temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
         <br>
-        Neste caso, relacionando sua capacidade atual e o cenário nacional de perda de 20%, com um sistema de monitoramento de temperatura e umidade instalado em seu armazém, R$ ${perdaArmaz.toFixed(2)} da sua armazenagem teriam sido salvos.
+        <br>
+        Neste caso, relacionando sua capacidade atual e o cenário nacional de perda de 20% que resultaria num montante de R$ ${prejuizo}, com um sistema de monitoramento de temperatura e umidade instalado em seu armazém, cerca de 60% desta perda de mercado, ou seja, R$ ${prejuizo*0.6}, poderiam ter sido salvos.
+        <br><br><br>
+        Quantidade estimada de sensores para a área de armazenamento: ${sensorMaximo.toFixed(0)}.
+        <br><span style="font-size: small;">*1 sensor = cobertura de área de 10m³</span>
         <br><br>
-        Quantidade estimada de sensores necessarios: ${sensorMaximo.toFixed(0)}.
-        <br><br>
+
+        <h5><b>As informações abaixo podem variar de acordo com a realidade do mercado e são apenas parametros para uma simulação.</h5></b>
     <table style="width: 50%; font-size: small;">
   <tr>
     <td style="vertical-align: top; width: 33%;">
-      Valores por método:<br>
-      Tonelada = R$${valorTonelada.toFixed(2)}<br>
-      Saca = R$${valorSaca.toFixed(2)}<br>
-      Bushel = R$${valorBushel.toFixed(2)}<br>
+    Valor médio utilizado<br> para cálculo: <br><br>
+    Saca - R$ ${saca} <br>
+    Tonelada - R$ ${tonelada} <br>
+    Bushel - R$ ${bushel} <br>
     </td>
     <td style="vertical-align: top; width: 33%;">
-      Informação de valor: <br>
+      Equivalências: <br><br>
       1 tonelada = 1.000 kg<br>
       1 Saca = 60 kg<br>
       1 Bushel = 27,2155 kg<br>
     </td>
     <td style="vertical-align: top; width: 33%;">
-      Valores médios utilizados: <br>
-      Saca - R$ 114,00 <br>
-      Tonelada - R$ 1780,00 <br>
-      Bushel - R$ 48,57 <br>
+    Se sua escolha fosse outra unidade de medida, você teria estes valores:<br><br>
+    Tonelada = R$${valorTonelada.toFixed(2)}<br>
+    Saca = R$${valorSaca.toFixed(2)}<br>
+    Bushel = R$${valorBushel.toFixed(2)}<br>
     </td>
     </tr>
     </table>
