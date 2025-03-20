@@ -80,12 +80,12 @@
             }
 
         div_mensagem2.innerHTML = `
-        Com base em sua capacidade de armazenamento, de ${producao} ${medida} de soja, ${porcentagemPerda.toFixed(2)}% transformou-se em perda, ou seja R$ ${prejuizo.toFixed(2)}. <br>Caso a solução da DeMetric, um sistema de monitoramento de temperatura e umidade, estivesse instalada em seu armazém, o equivalente a R$ ${(prejuizo*0.6).toFixed(2)} que representa 60% de sua armazengem, poderiam ter sido salvos.<br>
+        Com base em sua capacidade de armazenamento, de <b style="color:red;">${producao} ${medida}</b> de soja, <b style="color:red;">${porcentagemPerda.toFixed(0)}%</b> transformou-se em perda, ou seja <b style="color:red;">R$ ${prejuizo.toFixed(2)}</b>. <br>Caso a solução da DeMetric, um sistema de monitoramento de temperatura e umidade, estivesse instalada em seu armazém, <br><b style="color:green;">cerca de 60% de sua armazenagem, ou seja, R$ ${(prejuizo*0.6).toFixed(2)}, poderiam ter sido salvos.</b><br>
         
         <br>
-        No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
+        No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. <br>Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
         <br><br><br>
-         Quantidade estimada de sensores para a área de armazenamento: ${sensorMaximo.toFixed(0)}.
+        Quantidade estimada de sensores para a área de armazenamento: ${sensorMaximo.toFixed(0)}.
         <br><span style="font-size: small;">*1 sensor = cobertura de área de 10m³</span>
         <br><br>
 
@@ -146,7 +146,7 @@
                 3. Qual a unidade de medida de comercialização?<br>
                 (quilograma, toneladas, sacas, bushel) <br>
 
-                <select id="select_medida">Unidade de Medida
+                <select id="select_medida"  style="background-color:white; color:black; border:none; padding:7px">Unidade de Medida
                     <option value=" ">Selecione a unidade de medida</option>
                     <option value="toneladas">toneladas</option>
                     <option value="sacas">sacas</option>
@@ -155,7 +155,7 @@
 
                 4. Qual a sua armazenagem mensal?<br>
                 (De acorco a unidade de medida escolhida)
-                <br><input type="number" id="input_producao"><br><br>
+                <br><input type="number" id="input_producao" style="background-color:white; border:none; padding: 5px"><br><br>
                  <button onclick="calcular2()" style="background-color:black; color: white; padding: 8px; border: none;">Calcular</button><br>
                 `;
 
@@ -211,10 +211,10 @@
                 alert ("Erro! Selecione uma unidade de medida válida.");
             }
 
-        div_mensagem2.innerHTML = `No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e da temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
+        div_mensagem2.innerHTML = `No Brasil, estima-se que cerca de 20% da produção brasileira de grãos seja perdida devido a más condições de armazenamento. <br>Entre os grandes problemas que impactam nas perdas de grãos, estão a questão da umidade e da temperatura que, fora dos padrões, contribuem para a deterioração dos grãos.
         <br>
         <br>
-        Neste caso, relacionando sua capacidade atual e o cenário nacional de perda de 20% que resultaria num montante de R$ ${prejuizo}, com um sistema de monitoramento de temperatura e umidade instalado em seu armazém, cerca de 60% desta perda de mercado, ou seja, R$ ${prejuizo*0.6}, poderiam ter sido salvos.
+        Neste caso, relacionando sua capacidade atual e o <b style="color: red">cenário nacional de perda de 20%</b>,</br> que resultaria num montante de <b style="color:red;">R$ ${prejuizo}</b>, com um sistema de monitoramento de temperatura e umidade instalado em seu armazém, <br><b style="color: green">cerca de 60% desta perda de mercado, ou seja, R$ ${prejuizo*0.6}, poderiam ter sido salvos</b>.
         <br><br><br>
         Quantidade estimada de sensores para a área de armazenamento: ${sensorMaximo.toFixed(0)}.
         <br><span style="font-size: small;">*1 sensor = cobertura de área de 10m³</span>
