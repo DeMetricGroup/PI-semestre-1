@@ -23,18 +23,17 @@ CREATE TABLE cadastro (
     dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
     UFestado CHAR(2),
     cidade VARCHAR(30),
-    cep CHAR(8),
-    codeEmpresa INT
+    cep CHAR(8) 
 );
 -- Inserindo dados na tabela
 INSERT INTO cadastro(nomeEmpresa, senha, cnpj, email, UFestado, cidade, cep) VALUES 
-	('Empresa1', 'minhaSenha123', '75111946000124', 'pedro.almeida@email.com', 'RS', 'Porto Alegre', '90000000'),  
-	('Empresa2', 'seguranca456', '37281060000130', 'larissa.fonseca@email.com', 'SC', 'Florianópolis', '88000000'),  
-	('Empresa3', 'andre789', '06762026000153', 'andre.luiz@email.com', 'PR', 'Curitiba', '80000000'),  
-	('Empresa4', 'nextGenPass', '09491417000179', 'susana.martins@email.com', 'BA', 'Salvador', '40000000'),  
-	('Empresa5', 'marcosSenha', '94163378000150', 'marcos.lima@email.com', 'PE', 'Recife', '50000000');
+	('Empresa1', '678765432', '75111946000124', 'empresa.emp1@email.com', 'RS', 'Porto Alegre', '90000000'),  
+	('Empresa2', 'sAgu256nca456', '37281060000130', 'empresa.emp2@email.com', 'SC', 'Florianópolis', '88000000'),  
+	('Empresa3', 'an1aW1e789', '06762026000153', 'empresa.emp3@email.com', 'PR', 'Curitiba', '80000000'),  
+	('Empresa4', 'nRxtGe38330ss', '09491417000179', 'empresa.emp4@email.com', 'BA', 'Salvador', '40000000'),  
+	('Empresa5', 'marh1q5osAexdyt', '94163378000150', 'empresa.emp5@email.com', 'PE', 'Recife', '50000000');
     
-SELECT nomeEmpresa AS 'Empresa', senha AS 'Senha', cnpj AS 'CNPJ', dtRegistro AS 'Data de Registro',
+SELECT nomeEmpresa AS 'Empresa', senha AS 'Senha', cnpj AS 'CNPJ', email, dtRegistro AS 'Data de Registro',
  UFestado AS 'Estado', cidade AS 'Cidade', cep AS 'CEP' FROM cadastro;
  
  
@@ -46,13 +45,13 @@ CREATE TABLE funcionario(
     senha VARCHAR(50),
     nvlAcesso varchar(20),
     CONSTRAINT chkNvlAcesso CHECK (nvlAcesso IN('Admin','User')),
-	codeEmpresa INT UNIQUE
-);
+	codeEmpresa INT
+); desc funcionario;
 -- Inserindo dados na tabela
-INSERT INTO funcionario (nomeFuncionario, email, senha, nvlAcesso) VALUES
-	('Dennis Wilson Serrano', 'dennis.wilson@gmail.com', 'lknregnj', 'Admin'),
-	('Beatriz Silva Santos', 'beatriz.silva@gmail.com', 'dsghr', 'User'),
-	('Hannah Baker', 'hannah.baker@gmail.com', '12435yu', 'User');
+INSERT INTO funcionario (nomeFuncionario, email, senha, nvlAcesso, codeEmpresa) VALUES
+	('Dennis Wilson Serrano', 'dennis.wilson@gmail.com', 'lknregnj', 'Admin', 1),
+	('Beatriz Silva Santos', 'beatriz.silva@gmail.com', 'dsghr', 'User', 2),
+	('Hannah Baker', 'hannah.baker@gmail.com', '12435yu', 'User', 3);
     
 SELECT nomeFuncionario AS 'Nome do Funcionário', email AS 'Email', senha AS 'Senha', nvlAcesso AS 'Nivel de Acesso',
 codeEmpresa AS 'Código da empresa' FROM funcionario;
@@ -84,7 +83,7 @@ SELECT date_format(dtInstalacao, ' %d/%m/%Y') AS 'Data de Instalação' FROM sen
 -- TABELA 4 PARÂMETROS DO GRÃO
 CREATE TABLE parametroGrao (
 	idArmazem INT PRIMARY KEY AUTO_INCREMENT,
-    nomeArmazem VARCHAR(20),
+    nomeArmazem VARCHAR(30),
     maxUmidade DECIMAL(4,2),
     minUmidade DECIMAL(4,2),
     temperaturaMax DECIMAL(4,2),
